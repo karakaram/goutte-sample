@@ -69,6 +69,9 @@ HTML;
      */
     public function faceBookGoodCase()
     {
+        $yaml = new Parser();
+        $parameters = $yaml->parse(file_get_contents(__DIR__ . '/../../../app/config/parameters.yml'));
+
         $client = new Client();
 
         //Facebook トップページ表示
@@ -80,8 +83,8 @@ HTML;
         $crawler = $client->submit(
             $form,
             [
-                'email' => 'hoge@example.com',
-                'pass' => 'password'
+                'email' => $parameters['facebook']['email'],
+                'pass' => $parameters['facebook']['password']
             ]
         );
 

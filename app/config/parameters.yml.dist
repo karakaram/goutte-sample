@@ -5,3 +5,6 @@ database:
     password: ""
     dbname: ""
     charset: "utf8"
+facebook
+    email: ""
+    password: ""
