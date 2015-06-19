@@ -7,6 +7,7 @@ use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\DriverManager;
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\Yaml\Parser;
 
 class GoutteTestCase extends \PHPUnit_Framework_TestCase
 {
@@ -97,17 +98,11 @@ HTML;
 
     public function loadUserFixture()
     {
-        $parameters = [
-            "driver" => "pdo_mysql",
-            "host" => "localhost",
-            "user" => "root",
-            "password" => "password",
-            "dbname" => "database",
-            "charset" => "utf8",
-        ];
+        $yaml = new Parser();
+        $parameters = $yaml->parse(file_get_contents(__DIR__ . '/../../../app/config/parameters.yml'));
 
         $config = new Configuration([\PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC]);
-        $conn = DriverManager::getConnection($parameters, $config);
+        $conn = DriverManager::getConnection($parameters['database'], $config);
 
         $conn->exec('SET foreign_key_checks = 0');
         $conn->exec('truncate table user');
