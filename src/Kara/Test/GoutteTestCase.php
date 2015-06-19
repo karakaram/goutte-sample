@@ -108,6 +108,7 @@ HTML;
         $conn = DriverManager::getConnection($parameters['database'], $config);
 
         $conn->exec('SET foreign_key_checks = 0');
+
         $conn->exec('truncate table user');
 
         $sql = <<<TXT
@@ -119,5 +120,7 @@ TXT;
         $stmt->bindValue(':email', 'hoge@example.com');
         $stmt->bindValue(':name', 'fuga');
         $stmt->execute();
+
+        $conn->exec('SET foreign_key_checks = 1');
     }
 }
