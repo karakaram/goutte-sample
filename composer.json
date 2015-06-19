@@ -1,0 +1,12 @@
+{
+  "autoload": {
+    "psr-0": {
+      "": "src/"
+    }
+  },
+  "require": {
+    "fabpot/goutte": "~2.0",
+    "phpunit/phpunit": "~4.7",
+    "doctrine/dbal": "~2.5"
+  }
+}
